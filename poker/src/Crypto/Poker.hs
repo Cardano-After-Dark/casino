@@ -13,8 +13,8 @@
 module Crypto.Poker
     ( PlayerNumber
     , PlayerIdentity
-    , TEG.PublicBroadcast
-    , SIG.VerifyKey
+    , TEG.PublicBroadcast   -- elgamal: used for encrypting cards
+    , SIG.VerifyKey         -- any scheme w/ specific security guarentees: used to sign messages
     , Result(..)
     , Poker
     , Event(..)

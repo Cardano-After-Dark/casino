@@ -79,7 +79,8 @@ newtype DecryptSharePoint = DecryptSharePoint Point
 
 instance NFData DecryptSharePoint
 
-type PublicBroadcast = (PublicKey, DLOG.Proof)
+-- zk proof of this private key is associated with this public key without giving up the private key
+type PublicBroadcast = (PublicKey, DLOG.Proof) 
 type DecryptBroadcast = (DecryptSharePoint, DLEQ.Proof)
 
 -- | Ciphertext under a joint key that include the random element and the ciphered value

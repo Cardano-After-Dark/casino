@@ -2,7 +2,7 @@ name:                poker
 version:             0.0.1
 synopsis: secure poker protocol
 -- description:
-homepage:            https://github.com/vincenthz/poker#readme
+homepage:            https://github.com/input-output-hk/casino/poker#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Vincent Hanquez
@@ -74,4 +74,4 @@ benchmark bench
 
 source-repository head
   type:     git
-  location: https://github.com/vincenthz/poker
+  location: https://github.com/input-output-hk/casino

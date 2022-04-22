@@ -28,6 +28,9 @@ import qualified Prelude (getLine)
 type ChannelContent = Poker.Event Poker.Operation
 type ServerChan = Chan ChannelContent
 
+-- proof i am this person. . 
+-- public broadcast is elgamal - it has proof you have the priv key. 
+-- verify key has no proof.
 type FSCPlayer = (Poker.PlayerIdentity, Poker.VerifyKey, Poker.PublicBroadcast)
 
 type Logging = MVar ()
@@ -54,11 +57,14 @@ input lg s = withMVar lg $ \() -> do
     putStr "> " >> getLine
 
 -- | Registration of poker player number and their information
+-- MVar is wrapping our info so peers can read it as well
 newtype FSC = FSC (MVar [(Poker.PlayerNumber, FSCPlayer)])
 
 newFSC :: IO FSC
 newFSC = FSC <$> newMVar []
 
+
+-- checks the current state of the table. what Player Number (pid in paper) is available and assigns you one
 registerFSC :: FSC
             -> Poker.PlayerIdentity
             -> Poker.VerifyKey
@@ -86,7 +92,8 @@ player :: Logging
        -> Poker.PlayerIdentity
        -> IO ()
 player lg fsc servChan myIdentity = do
-    chan <- dupChan servChan
+    -- duplicates channel. all comms in one channel will now be copied to the other
+    chan <- dupChan servChan 
     rng <- drgNew
     priv <- Poker.generatePrivateInformation
     processResult chan (Poker.pokerStart (Poker.run @4 priv 10 100) (Poker.initialGameST 100 rng))

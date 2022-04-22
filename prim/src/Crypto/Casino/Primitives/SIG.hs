@@ -22,6 +22,8 @@ type VerifyKey = ECDSA.PublicKey
 type Signature = ECDSA.Signature
 type Message = UArray Word8
 
+-- signing is private, verify is public
+-- we can alter this key scheme to what Cardano uses
 generate :: MonadRandom randomly => randomly (SigningKey, VerifyKey)
 generate = do
     k <- ECC.scalarGenerate curve
